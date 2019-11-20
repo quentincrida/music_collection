@@ -22,4 +22,12 @@ class Artist
     SqlRunner.run(sql)
   end
 
+  def band_names()
+    sql = "SELECT * FROM artists WHERE name = $1;"
+    values = [@name]
+    band_names = SqlRunner.run(sql,values)
+    map{|band_name| Artist.new(band_name)}
+
+  end
+
 end

@@ -25,6 +25,16 @@ attr_reader :id, :artist_id
     SqlRunner.run(sql)
   end
 
+  def self.album_list()
+    sql = "SELECT title FROM albums"
+    #values = [@title]
+    SqlRunner.run(sql)
+  end
 
+  def
+
+  end
+
+  end
 
 end
