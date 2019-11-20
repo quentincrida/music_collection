@@ -40,7 +40,7 @@ attr_reader :id, :artist_id
   end
 
   def cd_names()
-    sql = "SELECT * FROM albums WHERE artist_id = $1";
+    sql = "SELECT * FROM albums WHERE artist_id = $3";
     values = [@id]
     cd_names = SqlRunner.run(sql, values)[0]
     return cd_names.map {|cd_name| Artist.new(cd_name)}
