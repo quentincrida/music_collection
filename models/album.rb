@@ -1,4 +1,5 @@
 require_relative('../db/sql.runner')
+require_relative('artist')
 
 class Album
 
@@ -31,10 +32,18 @@ attr_reader :id, :artist_id
     SqlRunner.run(sql)
   end
 
-  def
-
+  def musicians()
+    sql = "SELECT * FROM albums WHERE artist = $1"
+    values = [@name]
+    musicians = SqlRunner.new(sql,values)[1]
+    return musicians.map {|musician| Artist.new(musician)}
   end
 
+  def cd_names()
+    sql = "SELECT * FROM albums WHERE artist_id = $1";
+    values = [@id]
+    cd_names = SqlRunner.run(sql, values)[0]
+    return cd_names.map {|cd_name| Artist.new(cd_name)}
   end
 
 end
