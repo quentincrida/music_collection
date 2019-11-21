@@ -26,6 +26,12 @@ attr_reader :id, :artist_id
     SqlRunner.run(sql)
   end
 
+  def delete()
+    sql = "DELETE FROM albums WHERE id = $1 "
+    values = [@id]
+    SqlRunner.run(sql, values)
+  end
+
   def self.album_list()
     sql = "SELECT title FROM albums"
     #values = [@title]
@@ -33,10 +39,10 @@ attr_reader :id, :artist_id
   end
 
   def musicians()
-    sql = "SELECT * FROM albums WHERE artist = $1"
-    values = [@name]
-    musicians = SqlRunner.new(sql,values)[1]
-    return musicians.map {|musician| Artist.new(musician)}
+    sql = "SELECT * FROM albums WHERE id = $1"
+    values = [@artist_id]
+    musicians = SqlRunner.run(sql,values)[0]
+    return Artist.new(musicians)
   end
 
   def cd_names()
